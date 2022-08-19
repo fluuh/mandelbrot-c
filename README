@@ -1,0 +1,7 @@
+-- MANDELBROT --
+
+A small mandelbrot set renderer in C.
+
+To build, run:
+
+$ gcc -lm -O2 -lpthread main.c
