@@ -1,0 +1,19 @@
+BasedOnStyle: LLVM
+UseTab: ForIndentation
+ColumnLimit: 80
+IndentWidth: 8
+TabWidth: 8
+AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 180
+IndentCaseLabels: false
+BreakBeforeBraces: Linux
+SortIncludes: false
+
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: true
+BinPackParameters: true
+
+AllowShortFunctionsOnASingleLine: Empty
