@@ -4,4 +4,8 @@ A small mandelbrot set renderer in C.
 
 To build, run:
 
-$ gcc -lm -O2 -lpthread main.c
+$ gcc -O2 -lm -lpthread main.c
+
+To show progress, pass -DSHOW_PROGRESS:
+
+$ gcc -O2 -lm -lpthread -DSHOW_PROGRESS main.c

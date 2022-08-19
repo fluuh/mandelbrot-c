@@ -150,6 +150,13 @@ void mandel_parallel_fetch(struct mandel_shared *shared)
 			/* finished */
 			break;
 		}
+
+#ifdef SHOW_PROGRESS
+		fprintf(
+		    stdout, "\r%d/%d (%d%%)", i, shared->spec->height,
+		    (int)(100 * ((double)i / (double)shared->spec->height)));
+		fflush(stdout);
+#endif
 	}
 }
 
@@ -170,9 +177,9 @@ int mandel_parallel(unsigned char *img, struct mandel_spec *spec)
 	}
 
 	for (int i = 0; i < NUM_THREADS - 1; i++) {
-		int err = pthread_create(
-		    &threads[i], NULL,
-		    ((void *(*)(void *)) & mandel_parallel_fetch), &shared);
+		int err =
+		    pthread_create(&threads[i], NULL,
+		                   ((void *)&mandel_parallel_fetch), &shared);
 		if (err) {
 			fprintf(stderr, "can't create thread: %s\n",
 			        strerror(err));
@@ -194,12 +201,12 @@ int mandel_parallel(unsigned char *img, struct mandel_spec *spec)
 	// 	pthread_mutex_unlock(&shared.lock);
 	// 	sleep(1);
 	// }
-	// fprintf(stdout, "\r%d/%d (100%)\n", shared.spec->height,
-	// shared.spec->height);
 
 	for (int i = 0; i < NUM_THREADS - 1; i++) {
 		pthread_join(threads[i], NULL);
 	}
+	fprintf(stdout, "\r%d/%d (100%%)\n", shared.spec->height,
+	        shared.spec->height);
 
 	return 0;
 }
